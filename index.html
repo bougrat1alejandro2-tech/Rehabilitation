@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLEAN GAME — Athlete Recovery & Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,600;0,700;0,900;1,300;1,700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111317;
+    --card: #16191f;
+    --border: #252930;
+    --gold: #c9a84c;
+    --gold-light: #e8c96e;
+    --red: #c0392b;
+    --white: #f0ece4;
+    --muted: #7a7f8a;
+    --green: #2ecc71;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.6rem; letter-spacing: 0.12em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .logo span { color: var(--white); }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav ul a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem; letter-spacing: 0.1em; font-weight: 600;
+    color: var(--muted); text-decoration: none; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 0.9rem; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none;
+    padding: 0.55rem 1.4rem;
+    border: 2px solid var(--gold); color: var(--gold);
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(192,57,43,0.06) 0%, transparent 60%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 59px,
+        rgba(255,255,255,0.015) 60px
+      );
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.25em; font-weight: 600;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: inline-block;
+    width: 2.5rem; height: 2px; background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 900; line-height: 0.9;
+    text-transform: uppercase; letter-spacing: -0.01em;
+    max-width: 14ch;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--gold);
+    font-weight: 300; display: block;
+  }
+  .hero-sub {
+    margin-top: 2.5rem;
+    font-size: 1.15rem; line-height: 1.7;
+    max-width: 48ch; color: #b8b4ac;
+  }
+  .hero-actions {
+    display: flex; gap: 1.2rem; margin-top: 3rem; flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    padding: 1rem 2.4rem;
+    background: var(--gold); color: var(--black);
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; font-size: 1rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--white); border-bottom: 2px solid var(--border);
+    padding-bottom: 2px; transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--white); }
+  .hero-stat-row {
+    display: flex; gap: 4rem; margin-top: 5rem;
+    padding-top: 3rem; border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .hero-stat strong {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.8rem; font-weight: 900; color: var(--gold);
+    display: block; line-height: 1;
+  }
+  .hero-stat span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-top: 0.3rem; display: block;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.3em; font-weight: 600;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::before {
+    content: ''; display: inline-block;
+    width: 1.5rem; height: 2px; background: var(--gold);
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900; text-transform: uppercase; line-height: 0.95;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── CRISIS BANNER ── */
+  .crisis-bar {
+    background: var(--red);
+    padding: 1.1rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .crisis-bar p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em;
+  }
+  .crisis-bar a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.1em;
+    text-decoration: none; color: var(--black);
+    background: var(--white); padding: 0.5rem 1.4rem;
+    text-transform: uppercase; transition: background 0.2s;
+  }
+  .crisis-bar a:hover { background: #e0dcd4; }
+
+  /* ── STORIES ── */
+  #stories { background: var(--dark); }
+  .stories-intro {
+    max-width: 60ch; margin-bottom: 4rem;
+    font-size: 1.05rem; line-height: 1.8; color: #b8b4ac;
+  }
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .story-card {
+    background: var(--card);
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.25s;
+    cursor: pointer;
+  }
+  .story-card:hover { background: #1c2028; }
+  .story-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; width: 4px; height: 0;
+    background: var(--gold);
+    transition: height 0.3s ease;
+  }
+  .story-card:hover::before { height: 100%; }
+  .story-sport {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.2em; font-weight: 600;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .story-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.7rem; font-weight: 800; text-transform: uppercase;
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .story-card .subtitle {
+    font-style: italic; font-size: 0.9rem;
+    color: var(--muted); margin-bottom: 1.3rem;
+  }
+  .story-card p {
+    font-size: 0.92rem; line-height: 1.75; color: #9a96900;
+    color: #908c86;
+  }
+  .story-quote {
+    margin-top: 1.5rem; padding: 1rem 1.2rem;
+    border-left: 3px solid var(--border);
+    font-style: italic; font-size: 0.9rem; color: #b0ac a6;
+    color: #b0aca6;
+    transition: border-color 0.25s;
+  }
+  .story-card:hover .story-quote { border-color: var(--gold); }
+  .story-outcome {
+    margin-top: 1.5rem; display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 600;
+  }
+  .outcome-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .outcome-dot.recovery { background: var(--green); }
+  .outcome-dot.ongoing { background: var(--gold); }
+
+  /* ── UNDERSTAND ── */
+  #understand { background: var(--black); }
+  .understand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem; margin-top: 3rem; align-items: start;
+  }
+  .understand-text p {
+    font-size: 1rem; line-height: 1.85; color: #b0aca6;
+    margin-bottom: 1.4rem;
+  }
+  .ped-types { margin-top: 2rem; }
+  .ped-type {
+    border: 1px solid var(--border); padding: 1.3rem 1.5rem;
+    margin-bottom: 0.8rem; display: flex; align-items: flex-start;
+    gap: 1.2rem; transition: border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+  .ped-type:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+  .ped-icon {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 1.5rem; color: var(--gold);
+    min-width: 2rem; text-align: center; line-height: 1;
+  }
+  .ped-type h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 0.3rem;
+  }
+  .ped-type p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .warning-box {
+    background: rgba(192,57,43,0.08); border: 1px solid rgba(192,57,43,0.3);
+    padding: 1.8rem; margin-top: 2rem;
+  }
+  .warning-box h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #e74c3c; margin-bottom: 0.8rem;
+  }
+  .warning-box ul {
+    list-style: none; padding: 0;
+  }
+  .warning-box ul li {
+    font-size: 0.9rem; color: #b0aca6; padding: 0.35rem 0;
+    padding-left: 1.2rem; position: relative;
+  }
+  .warning-box ul li::before {
+    content: '—'; position: absolute; left: 0; color: #e74c3c; font-size: 0.8rem;
+  }
+
+  /* ── RESOURCES ── */
+  #resources { background: var(--dark); }
+  .resources-intro {
+    max-width: 55ch; color: #b0aca6;
+    font-size: 1rem; line-height: 1.8; margin-bottom: 4rem;
+  }
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .resource-card {
+    background: var(--black); border: 1px solid var(--border);
+    padding: 2rem; transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .resource-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .resource-icon {
+    font-size: 1.8rem; margin-bottom: 1rem; display: block;
+  }
+  .resource-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 0.6rem;
+  }
+  .resource-card p {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.65;
+    margin-bottom: 1.2rem;
+  }
+  .resource-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
+    font-weight: 600; color: var(--gold);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .resource-card:hover .resource-link { border-color: var(--gold); }
+
+  /* ── STEPS ── */
+  #steps { background: var(--black); }
+  .steps-layout {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 5rem; align-items: start; margin-top: 3rem;
+  }
+  .steps-list { counter-reset: step; }
+  .step-item {
+    display: flex; gap: 1.5rem; padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .step-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 3rem; font-weight: 900; line-height: 1;
+    color: var(--border); min-width: 2.5rem;
+    transition: color 0.2s;
+  }
+  .step-item:hover .step-num { color: var(--gold); }
+  .step-content h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.2rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 0.5rem;
+  }
+  .step-content p {
+    font-size: 0.9rem; color: var(--muted); line-height: 1.7;
+  }
+  .commitment-block {
+    background: var(--card); padding: 3rem;
+    border: 1px solid var(--border); position: sticky; top: 6rem;
+  }
+  .commitment-block h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem; font-weight: 900; text-transform: uppercase;
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .commitment-block h3 em { color: var(--gold); font-style: italic; font-weight: 300; }
+  .commitment-block > p {
+    font-size: 0.92rem; color: var(--muted); line-height: 1.7;
+    margin: 1.2rem 0 2rem;
+  }
+  .commitment-form { display: flex; flex-direction: column; gap: 1rem; }
+  .commitment-form input,
+  .commitment-form select,
+  .commitment-form textarea {
+    background: var(--black); border: 1px solid var(--border);
+    color: var(--white); padding: 0.85rem 1rem;
+    font-family: 'Lora', serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .commitment-form input:focus,
+  .commitment-form select:focus,
+  .commitment-form textarea:focus { border-color: var(--gold); }
+  .commitment-form textarea { resize: vertical; min-height: 90px; }
+  .commitment-form select { appearance: none; cursor: pointer; }
+  .form-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.3rem; display: block;
+  }
+  .commitment-form .btn-primary { width: 100%; text-align: center; border: none; cursor: pointer; font-size: 1rem; }
+  .privacy-note {
+    font-size: 0.78rem; color: var(--muted);
+    text-align: center; line-height: 1.5; margin-top: 0.5rem;
+  }
+
+  /* ── TESTIMONIALS ── */
+  #voices { background: var(--dark); }
+  .voices-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px; background: var(--border); margin-top: 3.5rem;
+  }
+  .voice-card {
+    background: var(--card); padding: 2.5rem; position: relative;
+  }
+  .voice-quote {
+    font-size: 3rem; color: var(--gold); line-height: 1;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .voice-card blockquote {
+    font-style: italic; font-size: 0.97rem; line-height: 1.8;
+    color: #c0bbb4; margin-bottom: 1.8rem;
+  }
+  .voice-attribution {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 600; display: flex; flex-direction: column; gap: 0.2rem;
+  }
+  .voice-attribution strong { color: var(--white); }
+  .voice-attribution span { color: var(--muted); font-size: 0.78rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 4rem 4rem 2rem;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand .logo { font-size: 1.4rem; display: block; margin-bottom: 1rem; }
+  .footer-brand p {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.7; max-width: 28ch;
+  }
+  .footer-col h5 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 600; color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+  .footer-col ul a {
+    color: var(--muted); text-decoration: none; font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid var(--border); padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: var(--muted); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.7s ease both; }
+  .hero h1      { animation: fadeUp 0.7s 0.15s ease both; }
+  .hero-sub     { animation: fadeUp 0.7s 0.28s ease both; }
+  .hero-actions { animation: fadeUp 0.7s 0.4s ease both; }
+  .hero-stat-row{ animation: fadeUp 0.7s 0.52s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .crisis-bar { padding: 1rem 1.5rem; }
+    .understand-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .steps-layout { grid-template-columns: 1fr; }
+    .commitment-block { position: static; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 3.5rem; }
+    .hero-stat-row { gap: 2rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">CLEAN<span>GAME</span></a>
+  <ul>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#understand">Understand</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#steps">Recovery</a></li>
+    <li><a href="#voices">Voices</a></li>
+  </ul>
+  <a href="#steps" class="nav-cta">Get Help Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Athlete Recovery &amp; Support</div>
+  <h1>Your<br>Career<br>Isn't<br><em>Over.</em></h1>
+  <p class="hero-sub">
+    Thousands of athletes have faced the pressure, made the choice, and found their way back. This is a safe space — for stories, for resources, and for recovery.
+  </p>
+  <div class="hero-actions">
+    <a href="#steps" class="btn-primary">Start Recovery</a>
+    <a href="#stories" class="btn-secondary">Read Stories →</a>
+  </div>
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <strong>1 in 14</strong>
+      <span>Elite athletes report PED use</span>
+    </div>
+    <div class="hero-stat">
+      <strong>76%</strong>
+      <span>Recover with proper support</span>
+    </div>
+    <div class="hero-stat">
+      <strong>24/7</strong>
+      <span>Crisis support available</span>
+    </div>
+  </div>
+</section>
+
+<!-- CRISIS BAR -->
+<div class="crisis-bar">
+  <p>🆘 &nbsp;Struggling right now? Confidential support is available immediately.</p>
+  <a href="tel:18006624357">Call SAMHSA: 1-800-662-4357</a>
+</div>
+
+<!-- STORIES -->
+<section id="stories">
+  <div class="section-label">Athlete Stories</div>
+  <h2 class="section-title">They Faced It.<br>They Fought Back.</h2>
+  <p class="stories-intro">
+    These stories are shared with permission. Each one is different — different sports, different pressures, different roads to recovery. All of them are real.
+  </p>
+
+  <div class="stories-grid">
+
+    <div class="story-card">
+      <div class="story-sport">⚡ Track &amp; Field</div>
+      <h3>Marion Jones</h3>
+      <div class="subtitle">5× Olympic Medalist, Sprinter</div>
+      <p>
+        At the peak of her career, Jones was the fastest woman in the world. Behind the medals was a secret — years of steroid use she later admitted to, leading to the surrender of all five Olympic medals and a prison sentence for lying to federal investigators.
+      </p>
+      <div class="story-quote">
+        "It was the biggest mistake of my life. I lost everything I had worked for."
+      </div>
+      <div class="story-outcome">
+        <div class="outcome-dot recovery"></div>
+        <span style="color:#2ecc71">In Recovery — Now a youth coach and advocate</span>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-sport">⚾ Baseball</div>
+      <h3>Ken Caminiti</h3>
+      <div class="subtitle">1996 NL MVP, Third Baseman</div>
+      <p>
+        In 2002, Caminiti became one of the first major athletes to publicly admit to steroid use during his MVP season. His openness sparked a national conversation about PEDs in baseball — but his battles with addiction ultimately claimed his life in 2004 at age 41.
+      </p>
+      <div class="story-quote">
+        "I've made a ton of mistakes. I don't think what I did was right, and I don't think it should be condoned."
+      </div>
+      <div class="story-outcome">
+        <div class="outcome-dot" style="background:#e74c3c"></div>
+        <span style="color:#e74c3c">Passed away 2004 — His story changed baseball forever</span>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-sport">🚴 Cycling</div>
+      <h3>David Millar</h3>
+      <div class="subtitle">World Champion Cyclist</div>
+      <p>
+        British cyclist David Millar admitted to EPO use in 2004 after a police raid. Banned for two years, he returned to the sport as one of cycling's most vocal anti-doping advocates and later helped found the Slipstream team, built entirely on clean sport principles.
+      </p>
+      <div class="story-quote">
+        "Doping was a form of self-destruction. Coming back clean was the hardest — and best — thing I ever did."
+      </div>
+      <div class="story-outcome">
+        <div class="outcome-dot recovery"></div>
+        <span style="color:#2ecc71">Full Recovery — Anti-doping campaigner &amp; author</span>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-sport">🏈 NFL</div>
+      <h3>Lyle Alzado</h3>
+      <div class="subtitle">All-Pro Defensive End</div>
+      <p>
+        One of the NFL's most feared players, Alzado credited much of his performance to steroid use — a habit that began in college. In 1991, diagnosed with brain lymphoma, he publicly attributed his illness to steroid abuse, becoming a cautionary voice until his death in 1992.
+      </p>
+      <div class="story-quote">
+        "I'm not here to be judged. I just want to warn you."
+      </div>
+      <div class="story-outcome">
+        <div class="outcome-dot" style="background:#e74c3c"></div>
+        <span style="color:#e74c3c">Passed away 1992 — A defining warning for the NFL</span>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-sport">🏊 Swimming</div>
+      <h3>Jessica Hardy</h3>
+      <div class="subtitle">Olympic Swimmer, World Record Holder</div>
+      <p>
+        Hardy tested positive for clenbuterol in 2008, missing the Beijing Olympics. She successfully argued contaminated supplements as the source and served a reduced ban. She returned, competed at the 2012 London Olympics, and became an outspoken advocate for clean sport and supplement awareness.
+      </p>
+      <div class="story-quote">
+        "This experience defined my character in ways no gold medal ever could."
+      </div>
+      <div class="story-outcome">
+        <div class="outcome-dot recovery"></div>
+        <span style="color:#2ecc71">Full Recovery — Competed in 2012 &amp; 2016 Olympics</span>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="story-sport">💪 Bodybuilding</div>
+      <h3>Rich Piana</h3>
+      <div class="subtitle">Professional Bodybuilder &amp; Entrepreneur</div>
+      <p>
+        Piana was unusually candid about his 27-year steroid use, using his platform to discuss both the perceived benefits and the serious health consequences. His transparency was controversial — some praised his honesty, others felt it normalized dangerous behavior. He died in 2017 at age 46.
+      </p>
+      <div class="story-quote">
+        "If you have the choice to stay natural, stay natural. No trophy is worth dying for."
+      </div>
+      <div class="story-outcome">
+        <div class="outcome-dot" style="background:#e74c3c"></div>
+        <span style="color:#e74c3c">Passed away 2017 — His legacy sparked broader conversations</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- UNDERSTAND -->
+<section id="understand">
+  <div class="section-label">Education</div>
+  <h2 class="section-title">Understanding<br>PEDs</h2>
+  <div class="understand-grid">
+    <div class="understand-text">
+      <p>
+        Performance-enhancing drugs cover a broad category of substances athletes use to gain competitive advantages. They range from anabolic steroids and hormones to stimulants and blood doping agents.
+      </p>
+      <p>
+        Understanding what these substances are — and what they actually do to the body — is the first step toward making an informed choice, and toward recovery.
+      </p>
+
+      <div class="ped-types">
+        <div class="ped-type">
+          <div class="ped-icon">S</div>
+          <div>
+            <h4>Anabolic Steroids</h4>
+            <p>Synthetic testosterone variants that increase muscle mass and recovery. Examples: nandrolone, stanozolol. Long-term risks include heart disease, liver damage, hormonal disruption, and psychiatric effects.</p>
+          </div>
+        </div>
+        <div class="ped-type">
+          <div class="ped-icon">H</div>
+          <div>
+            <h4>Human Growth Hormone (HGH)</h4>
+            <p>Promotes muscle growth and fat loss. Risks include acromegaly, joint pain, diabetes risk, and cardiovascular complications with long-term use.</p>
+          </div>
+        </div>
+        <div class="ped-type">
+          <div class="ped-icon">E</div>
+          <div>
+            <h4>EPO / Blood Doping</h4>
+            <p>Erythropoietin boosts red blood cell production for endurance. Risks include stroke, heart attack, and death — especially during sleep when heart rate slows.</p>
+          </div>
+        </div>
+        <div class="ped-type">
+          <div class="ped-icon">S</div>
+          <div>
+            <h4>Stimulants</h4>
+            <p>Amphetamines, cocaine, and similar substances increase alertness and reduce fatigue. Highly addictive with serious cardiovascular and psychological dependence risks.</p>
+          </div>
+        </div>
+        <div class="ped-type">
+          <div class="ped-icon">B</div>
+          <div>
+            <h4>Beta Blockers</h4>
+            <p>Used in precision sports to reduce tremors and heart rate. Can cause dangerous cardiac suppression in healthy athletes and mask other substance use.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="warning-box">
+        <h4>⚠ Documented Health Consequences</h4>
+        <ul>
+          <li>Premature cardiovascular disease and enlarged heart</li>
+          <li>Liver tumors and peliosis hepatis</li>
+          <li>Severe hormonal imbalances — lasting for years post-cessation</li>
+          <li>Psychological dependence, aggression, and depression</li>
+          <li>Tendon damage due to muscle outpacing connective tissue growth</li>
+          <li>Stunted growth in adolescent athletes</li>
+          <li>Increased risk of certain cancers with prolonged use</li>
+          <li>Compromised immune function</li>
+          <li>Withdrawal syndromes requiring medical supervision</li>
+        </ul>
+      </div>
+
+      <div style="margin-top:1.5rem; padding:2rem; border:1px solid var(--border); background:var(--card);">
+        <h4 style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem;">The Pressure Is Real</h4>
+        <p style="font-size:0.92rem;color:#908c86;line-height:1.75;">
+          Most athletes don't begin using PEDs out of moral weakness — they begin because of intense external pressure: coaches, teams, sponsorships, rankings. Acknowledging this doesn't excuse the choice, but it's essential context for recovery. Many athletes describe feeling like they had no option.
+        </p>
+        <p style="font-size:0.92rem;color:#908c86;line-height:1.75;margin-top:1rem;">
+          Recovery programs that ignore the systemic pressures athletes face are less effective. The best support approaches address both the substance dependency and the competitive environment that normalized use in the first place.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-label">Support &amp; Resources</div>
+  <h2 class="section-title">You Don't Have<br>To Do This Alone</h2>
+  <p class="resources-intro">
+    These organizations and programs specialize in supporting athletes through substance use challenges, legal concerns, and long-term recovery.
+  </p>
+
+  <div class="resources-grid">
+
+    <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" class="resource-card">
+      <span class="resource-icon">📞</span>
+      <h3>SAMHSA Helpline</h3>
+      <p>Free, confidential, 24/7 treatment referral and information service for substance use disorders. No insurance required.</p>
+      <span class="resource-link">1-800-662-4357 →</span>
+    </a>
+
+    <a href="https://www.usada.org/resources/athlete-resources/whereabouts/" target="_blank" class="resource-card">
+      <span class="resource-icon">🏅</span>
+      <h3>USADA Athlete Support</h3>
+      <p>The US Anti-Doping Agency offers confidential guidance on testing, violations, appeals, and mental health resources for athletes.</p>
+      <span class="resource-link">Visit USADA →</span>
+    </a>
+
+    <a href="https://www.drugfree.org" target="_blank" class="resource-card">
+      <span class="resource-icon">🤝</span>
+      <h3>Partnership to End Addiction</h3>
+      <p>Expert guidance, a helpline for families, and a treatment locator. Specifically trained counselors for athletes available.</p>
+      <span class="resource-link">drugfree.org →</span>
+    </a>
+
+    <a href="https://athletementalhealth.org" target="_blank" class="resource-card">
+      <span class="resource-icon">🧠</span>
+      <h3>Athlete Mental Health</h3>
+      <p>Mental health resources tailored to competitive athletes, including substance use, performance anxiety, identity loss, and transition.</p>
+      <span class="resource-link">Learn more →</span>
+    </a>
+
+    <a href="https://www.findtreatment.gov" target="_blank" class="resource-card">
+      <span class="resource-icon">📍</span>
+      <h3>Treatment Locator</h3>
+      <p>SAMHSA's national directory of substance use treatment facilities. Search by location, insurance, and specialty including athlete-specific programs.</p>
+      <span class="resource-link">Find treatment →</span>
+    </a>
+
+    <a href="https://www.na.org" target="_blank" class="resource-card">
+      <span class="resource-icon">🔄</span>
+      <h3>Narcotics Anonymous</h3>
+      <p>Peer-based recovery meetings worldwide, including online and phone meetings. Many chapters have athlete-specific or sports-adjacent groups.</p>
+      <span class="resource-link">na.org →</span>
+    </a>
+
+    <a href="https://www.wada-ama.org/en/athletes" target="_blank" class="resource-card">
+      <span class="resource-icon">🌐</span>
+      <h3>WADA Athlete Resources</h3>
+      <p>World Anti-Doping Agency resources for international athletes including therapeutic use exemptions, whistleblower protections, and education.</p>
+      <span class="resource-link">WADA Athletes →</span>
+    </a>
+
+    <a href="https://988lifeline.org" target="_blank" class="resource-card">
+      <span class="resource-icon">💛</span>
+      <h3>988 Crisis Lifeline</h3>
+      <p>If substance use is part of a deeper mental health crisis, the 988 Suicide &amp; Crisis Lifeline provides immediate support. Call or text 988.</p>
+      <span class="resource-link">Call or Text 988 →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps">
+  <div class="section-label">Recovery Roadmap</div>
+  <h2 class="section-title">The Path<br>Forward</h2>
+
+  <div class="steps-layout">
+    <div class="steps-list">
+
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Acknowledge Without Shame</h4>
+          <p>Recovery begins with honesty — with yourself first. PED use often develops gradually under immense pressure. Recognizing the problem isn't weakness; it's the foundation of every recovery story on this site.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Seek Medical Evaluation</h4>
+          <p>Many PEDs cause physiological dependence. Stopping abruptly can be dangerous. A physician familiar with performance drug use can assess your health, manage withdrawal safely, and create a tapering plan.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Get Confidential Counseling</h4>
+          <p>The psychological side of recovery is as critical as the physical. Sports-specialized therapists understand the identity pressures athletes face and can help you separate self-worth from performance.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Tell One Trusted Person</h4>
+          <p>Isolation is the enemy of recovery. Whether a family member, former teammate, or therapist — having one person who knows what you're going through dramatically improves recovery outcomes.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h4>Explore Your Options with Governing Bodies</h4>
+          <p>In many cases, voluntary disclosure to sports governing bodies results in reduced sanctions, especially when paired with cooperation. USADA and WADA both have confidential inquiry processes.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">06</div>
+        <div class="step-content">
+          <h4>Rebuild Your Identity</h4>
+          <p>Athletes often define themselves entirely through performance. Recovery is also about rediscovering who you are beyond sport — and in many cases, becoming a more complete version of yourself.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="commitment-block">
+      <h3>Take the<br><em>First Step</em></h3>
+      <p>Tell us a little about where you are. We'll connect you with appropriate resources. This form is completely confidential — no names are stored or shared.</p>
+
+      <div class="commitment-form">
+        <div>
+          <label class="form-label">Your sport (optional)</label>
+          <select>
+            <option value="">Select a sport…</option>
+            <option>Track &amp; Field</option>
+            <option>Cycling</option>
+            <option>Swimming</option>
+            <option>Football / NFL</option>
+            <option>Baseball / MLB</option>
+            <option>Bodybuilding</option>
+            <option>MMA / Combat Sports</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Where are you right now?</label>
+          <select>
+            <option value="">Select one…</option>
+            <option>Currently using — want to stop</option>
+            <option>Recently stopped — struggling with withdrawal</option>
+            <option>Stopped — dealing with health or legal consequences</option>
+            <option>Researching for a friend or teammate</option>
+            <option>Just looking for information</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">What kind of support are you looking for?</label>
+          <textarea placeholder="Medical help, counseling, legal guidance, peer support…"></textarea>
+        </div>
+        <button class="btn-primary" onclick="alert('Thank you for reaching out. In a live version of this site, a trained counselor would contact you securely within 24 hours. For immediate support, please call SAMHSA: 1-800-662-4357.')">Connect Me With Support</button>
+        <p class="privacy-note">🔒 No personal data is stored. This form is for routing purposes only. For immediate crisis support, call 1-800-662-4357.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section id="voices">
+  <div class="section-label">Recovery Voices</div>
+  <h2 class="section-title">Words From<br>Those Who've<br>Been There</h2>
+
+  <div class="voices-grid">
+    <div class="voice-card">
+      <div class="voice-quote">"</div>
+      <blockquote>
+        I told myself it was just to stay competitive. But when I stopped, I realized I'd lost the ability to trust my own body. Recovery gave that back to me — and a lot more.
+      </blockquote>
+      <div class="voice-attribution">
+        <strong>Anonymous</strong>
+        <span>Professional Cyclist, 7 years use, 3 years recovery</span>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-quote">"</div>
+      <blockquote>
+        The hardest part wasn't stopping. It was admitting that I didn't believe in myself enough without it. That was the real problem — and that was what we had to fix.
+      </blockquote>
+      <div class="voice-attribution">
+        <strong>Anonymous</strong>
+        <span>College Football Lineman, 2 years use, 4 years recovery</span>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-quote">"</div>
+      <blockquote>
+        My coach introduced me to it at 17. I didn't know what I was doing. For years I blamed myself. Therapy helped me understand it was not entirely my fault — but also that recovery was entirely my responsibility.
+      </blockquote>
+      <div class="voice-attribution">
+        <strong>Anonymous</strong>
+        <span>Track Athlete, Youth system exposure, 5 years recovery</span>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-quote">"</div>
+      <blockquote>
+        I lost my sponsorships, my ranking, and two years of competition. What I gained was my health, my family's trust, and a career I'm actually proud of — coaching kids who don't even know what PEDs are.
+      </blockquote>
+      <div class="voice-attribution">
+        <strong>Anonymous</strong>
+        <span>Powerlifter, 5 years use, 6 years recovery — now a coach</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">CLEAN<span>GAME</span></a>
+      <p>A safe, confidential resource for athletes navigating PED use, dependency, and recovery. No judgment. No headlines. Just support.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigate</h5>
+      <ul>
+        <li><a href="#stories">Athlete Stories</a></li>
+        <li><a href="#understand">Understand PEDs</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#steps">Recovery Steps</a></li>
+        <li><a href="#voices">Recovery Voices</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Crisis Support</h5>
+      <ul>
+        <li><a href="tel:18006624357">SAMHSA: 1-800-662-4357</a></li>
+        <li><a href="tel:988">Crisis Line: 988</a></li>
+        <li><a href="https://www.usada.org">USADA Confidential</a></li>
+        <li><a href="https://www.findtreatment.gov">Find Treatment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">No Data Stored</a></li>
+        <li><a href="#">Disclaimer</a></li>
+        <li><a href="#">Submit Your Story</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Clean Game. All stories used with permission or anonymized.</p>
+    <p>This site does not constitute medical advice. If you are in crisis, call 988 or SAMHSA at 1-800-662-4357.</p>
+  </div>
+</footer>
+
+</body>
+</html>
